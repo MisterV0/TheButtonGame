@@ -1,0 +1,686 @@
+/* =====================================================================
+   LANDING.CSS: layout and look of the landing page (index.html)
+   ===================================================================== */
+
+
+/* ---------- Page layout: one centered column ---------- */
+
+/* The page is at least one screen tall, so the footer always sits at the very bottom */
+.landing {
+  display: flex;
+  flex-direction: column;
+}
+
+.landing__main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding:
+    calc(28px + env(safe-area-inset-top))
+    calc(16px + env(safe-area-inset-right))
+    28px
+    calc(16px + env(safe-area-inset-left));
+}
+
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  text-align: center;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 17vw, 5.6rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  text-shadow: 3px 3px 0 var(--red);
+}
+
+.hero__line {
+  display: block;
+}
+
+.hero__badge {
+  position: absolute;
+  right: 2%;
+  top: calc(clamp(3.4rem, 17vw, 5.6rem) * 0.78);
+  width: clamp(68px, 19vw, 90px);
+  height: auto;
+  transform: rotate(10deg);
+  overflow: visible;
+}
+
+.hero__badge-text {
+  font-family: var(--font-display);
+  font-size: 27px;
+  fill: #1B1B1F;
+  letter-spacing: 0.02em;
+}
+
+.hero__tagline {
+  max-width: 24ch;
+  margin: 18px auto 0;
+  color: var(--text-soft);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+
+/* ---------- Panels (the cards) ---------- */
+
+.panel {
+  position: relative;
+  padding: 18px 18px 20px;
+}
+
+.panel__title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+
+/* ---------- Button style carousel ---------- */
+
+.picker .panel__title {
+  text-align: center;
+}
+
+.carousel {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.carousel__stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 196px;
+  touch-action: pan-y;           /* vertical scroll still works, sideways swipes change style */
+  cursor: pointer;
+}
+
+.carousel__stage .game-button {
+  --size: 164px;
+  cursor: inherit;
+}
+
+/* A small spring when the style changes */
+.carousel__stage .game-button.is-popping {
+  animation: carousel-pop 260ms var(--ease-spring);
+}
+
+@keyframes carousel-pop {
+  0% { transform: scale(0.86); }
+  100% { transform: scale(1); }
+}
+
+.carousel__stage.is-locked .game-button {
+  filter: grayscale(0.85);
+  opacity: 0.6;
+}
+
+.carousel__lock {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: var(--outline-width) solid var(--line);
+  border-radius: 50%;
+  background: var(--yellow);
+  color: #1B1B1F;
+  box-shadow: var(--shadow-small);
+}
+
+.carousel__lock svg {
+  width: 26px;
+  height: 26px;
+}
+
+.carousel__name {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.carousel__hint {
+  margin-top: 2px;
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  min-height: 12px;
+  margin-top: 10px;
+}
+
+.carousel__dot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  transition: background-color 150ms var(--ease-out), transform 150ms var(--ease-out);
+}
+
+.carousel__dot.is-active {
+  background: var(--red);
+  transform: scale(1.15);
+}
+
+
+/* ---------- Difficulty ---------- */
+
+/* The ⓘ sits right after the heading (not at the far right, where the
+   trophy button could cover it on small phones) */
+.difficulty__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-toggle[aria-expanded="true"] {
+  background: var(--blue);
+  color: var(--on-color);
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.segmented__option {
+  position: relative;
+  display: block;
+}
+
+/* The real radio button is invisible but still works with keyboard and screen readers */
+.segmented__option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.segmented__option span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  border: var(--outline-width) solid var(--line);
+  border-radius: var(--radius-small);
+  background: var(--surface-muted);
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 900;
+  transition: transform 120ms var(--ease-out), box-shadow 120ms var(--ease-out), background-color 120ms var(--ease-out);
+  pointer-events: none;
+}
+
+.segmented__option input:checked + span {
+  background: var(--red);
+  color: var(--on-color);
+  box-shadow: var(--shadow-small);
+  transform: translate(-1px, -1px);
+}
+
+.segmented__option input:focus-visible + span {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* The ⓘ explanation bubble */
+.popover {
+  position: absolute;
+  z-index: 20;
+  top: 70px;
+  left: 10px;
+  width: min(310px, calc(100% - 20px));
+  padding: 14px 16px;
+  border: var(--outline-width) solid var(--line);
+  border-radius: var(--radius-small);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  font-size: 0.98rem;
+  line-height: 1.4;
+  animation: popover-in 180ms var(--ease-spring);
+}
+
+.popover p + p {
+  margin-top: 8px;
+}
+
+/* The little tail pointing at the ⓘ button (which sits right after the heading) */
+.popover::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 139px;
+  width: 16px;
+  height: 16px;
+  border-top: var(--outline-width) solid var(--line);
+  border-left: var(--outline-width) solid var(--line);
+  background: var(--surface);
+  transform: rotate(45deg);
+}
+
+@keyframes popover-in {
+  0% { opacity: 0; transform: translateY(-6px) scale(0.96); }
+  100% { opacity: 1; transform: none; }
+}
+
+
+/* ---------- PLAY ---------- */
+
+.play-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  margin-top: 4px;
+  border: var(--outline-width) solid var(--line);
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--on-color);
+  box-shadow: 6px 6px 0 var(--line);
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 var(--line);
+  transition: transform 120ms var(--ease-out), box-shadow 120ms var(--ease-out);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.play-button:active {
+  transform: translate(5px, 5px);
+  box-shadow: 1px 1px 0 var(--line);
+}
+
+
+/* ---------- Friend banner (from a shared link) ---------- */
+
+.friend-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px 16px;
+  background: var(--yellow);
+  color: #1B1B1F;
+}
+
+.friend-banner__text {
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.friend-banner__text strong {
+  color: var(--red-dark);
+  font-weight: 900;
+}
+
+.friend-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.friend-banner__actions .btn {
+  flex: 1;
+}
+
+.friend-banner .icon-button {
+  flex-shrink: 0;
+  background: #FFFFFF;
+  color: #1B1B1F;
+}
+
+
+/* ---------- How to play ---------- */
+
+.howto {
+  margin-top: 14px;
+}
+
+.howto__title {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.howto__steps {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.howto__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+}
+
+.howto__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: var(--outline-width) solid var(--line);
+  border-radius: 50%;
+  background: var(--yellow);
+  color: #1B1B1F;
+  box-shadow: var(--shadow-small);
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.howto__step-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.howto__step p {
+  margin-top: 2px;
+  color: var(--text-soft);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.howto__note {
+  max-width: 34ch;
+  margin: 16px auto 0;
+  color: var(--text-soft);
+  font-weight: 700;
+  text-align: center;
+  text-wrap: balance;
+}
+
+
+/* ---------- Personal Bests: trophy button (bottom right) + modal ---------- */
+
+.corner-trophy {
+  position: fixed;
+  z-index: 30;
+  right: calc(16px + env(safe-area-inset-right));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  background: var(--yellow);
+  color: #1B1B1F;
+}
+
+.bests__subtitle {
+  margin-top: 6px;
+  color: var(--text-soft);
+  font-weight: 700;
+}
+
+.bests__table {
+  width: 100%;
+  margin-top: 14px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.bests__table th {
+  padding: 0 4px 8px;
+  color: var(--text-soft);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bests__table td {
+  padding: 10px 4px;
+  border-top: 2px dashed var(--surface-muted);
+  font-weight: 800;
+}
+
+.bests__rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface-muted);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.bests__rank--first {
+  background: var(--yellow);
+  color: #1B1B1F;
+}
+
+.bests__levels {
+  color: var(--red);
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.bests__empty {
+  padding: 28px 8px 10px;
+  color: var(--text-soft);
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+
+/* ---------- Footer ---------- */
+
+/* The footer shares the bottom row with the language button (bottom left),
+   so it keeps 72px free on both sides and stays centered */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(76px + env(safe-area-inset-bottom));
+  padding:
+    8px
+    calc(72px + env(safe-area-inset-right))
+    calc(8px + env(safe-area-inset-bottom))
+    calc(72px + env(safe-area-inset-left));
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.footer a {
+  display: inline-block;
+  padding: 10px 2px;                 /* bigger tap target… */
+  margin: -10px 0;                   /* …without making the line taller */
+  color: var(--text);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+
+/* ---------- Language menu (bottom left) ---------- */
+
+.lang {
+  position: fixed;
+  z-index: 30;
+  left: calc(16px + env(safe-area-inset-left));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
+.lang__toggle[aria-expanded="true"] {
+  background: var(--blue);
+  color: var(--on-color);
+}
+
+.lang__menu {
+  position: absolute;
+  bottom: 58px;
+  left: 0;
+  width: 240px;
+  padding: 6px;
+  border-radius: var(--radius-small);
+  animation: popover-in 180ms var(--ease-spring);
+}
+
+.lang__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  font-size: 1rem;
+  font-weight: 800;
+  text-align: left;
+}
+
+.lang__item.is-current {
+  background: var(--surface-muted);
+}
+
+.lang__item.is-soon {
+  color: var(--text-soft);
+  cursor: not-allowed;
+}
+
+.lang__item.is-soon > span {
+  opacity: 0.6;
+}
+
+.lang__check {
+  width: 20px;
+  height: 20px;
+  color: var(--red);
+}
+
+.lang__soon {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--yellow);
+  color: #1B1B1F;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+
+/* ---------- Wide screens: two columns, so PLAY is visible without scrolling ---------- */
+
+@media (min-width: 880px) {
+  .landing__main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "banner banner"
+      "hero picker"
+      "play difficulty"
+      "howto howto";
+    align-items: center;
+    column-gap: 56px;
+    row-gap: 24px;
+    max-width: 960px;
+    padding-top: calc(min(9vh, 72px) + env(safe-area-inset-top));
+  }
+
+  .hero {
+    grid-area: hero;
+  }
+
+  .picker {
+    grid-area: picker;
+  }
+
+  .difficulty {
+    grid-area: difficulty;
+  }
+
+  .play-button {
+    grid-area: play;
+    margin-top: 0;
+  }
+
+  .friend-banner {
+    grid-area: banner;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .friend-banner__actions .btn {
+    flex: none;
+  }
+
+  .howto {
+    grid-area: howto;
+    margin-top: 40px;
+  }
+
+  .howto__steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__stage .game-button.is-popping,
+  .popover,
+  .lang__menu {
+    animation: none;
+  }
+}

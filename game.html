@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- The game page has no content for Google: keep searchers on the landing page -->
+  <meta name="robots" content="noindex">
+  <title>Play · The Button Game</title>
+
+  <meta name="theme-color" content="#FFF6E5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1D1B21" media="(prefers-color-scheme: dark)">
+  <!-- Temporary icon. The real app icons come in a later phase. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%23E5322D' stroke='%231B1B1F' stroke-width='3'/%3E%3C/svg%3E">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/game.css">
+</head>
+<body class="game-page">
+
+  <!-- All words on this page come from js/text.js (the data-text="..." spots). -->
+
+  <!-- ================= GAME SCREEN ================= -->
+  <div class="game" id="game">
+
+    <header class="game__top">
+      <button type="button" class="icon-button" id="quit-button" data-aria-text="quitButtonLabel">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+      </button>
+      <div class="level">
+        <span class="level__label" data-text="levelLabel"></span>
+        <span class="level__number" id="level-number">01</span>
+      </div>
+      <span class="game__top-spacer" aria-hidden="true"></span>
+    </header>
+
+    <div class="machine">
+      <!-- The timer ring: it empties as time runs out -->
+      <svg class="timer-ring" viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="timer-ring__outline" cx="100" cy="100" r="90"/>
+        <circle class="timer-ring__track" cx="100" cy="100" r="90"/>
+        <circle class="timer-ring__progress" id="timer-progress" cx="100" cy="100" r="90"/>
+      </svg>
+
+      <!-- THE button. Same structure as every style in css/buttons.css -->
+      <button type="button" class="game-button btn-style--classic" id="game-button" data-aria-text="buttonLabel">
+        <span class="game-button__base"></span>
+        <span class="game-button__cap"></span>
+      </button>
+
+      <!-- Comic burst (POW!, KRAK!) -->
+      <div class="burst" id="burst" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <polygon class="burst-shape" points="100,4 115,36 137,22 141,48 173,42 159,71 180,82 166,100 194,121 159,129 169,155 141,152 140,182 115,164 100,184 85,164 58,186 59,152 32,154 41,129 10,121 34,100 19,81 41,71 26,41 59,48 62,21 85,36"/>
+        </svg>
+        <span class="burst__text" id="burst-text"></span>
+      </div>
+    </div>
+
+    <p class="counter" id="press-counter" aria-hidden="true" hidden>0</p>
+
+    <div class="instruction card">
+      <p class="instruction__text" id="instruction-text" aria-live="polite"></p>
+      <!-- Shown once, on a player's very first game -->
+      <p class="instruction__hint" id="instruction-hint" data-text="firstGameHint" hidden></p>
+    </div>
+  </div>
+
+  <!-- ================= END SCREEN ================= -->
+  <section class="end" id="end-screen" aria-labelledby="end-title" hidden>
+    <div class="end__inner">
+      <h1 class="end__title" id="end-title" tabindex="-1" data-text="gameOverTitle"></h1>
+
+      <!-- Card A: the level that ended the run -->
+      <article class="card end-card">
+        <h2 class="end-card__title" data-text="lastLevelTitle"></h2>
+        <p class="end-card__instruction" id="end-instruction"></p>
+        <p class="end-card__details" id="end-details">
+          <span data-text="requiredLabel"></span> <strong id="end-required"></strong>
+          <span class="end-card__separator" aria-hidden="true">·</span>
+          <span data-text="youPressedLabel"></span> <strong id="end-pressed"></strong>
+        </p>
+      </article>
+
+      <!-- Card B: the whole run -->
+      <article class="card end-card">
+        <div class="end-card__header">
+          <h2 class="end-card__title" data-text="yourRunTitle"></h2>
+          <span class="new-best" id="new-best" data-text="newBest" hidden></span>
+        </div>
+        <dl class="stats">
+          <div class="stats__row stats__row--big">
+            <dt data-text="levelsCompletedLabel"></dt>
+            <dd id="stat-levels"></dd>
+          </div>
+          <div class="stats__row">
+            <dt data-text="difficultyLabel"></dt>
+            <dd id="stat-difficulty"></dd>
+          </div>
+          <div class="stats__row">
+            <dt data-text="totalPressesLabel"></dt>
+            <dd id="stat-presses"></dd>
+          </div>
+          <div class="stats__row">
+            <dt data-text="totalTimeLabel"></dt>
+            <dd id="stat-time"></dd>
+          </div>
+        </dl>
+      </article>
+
+      <div class="end__actions" id="end-actions">
+        <button type="button" class="btn btn--primary end__share" id="share-button">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+          <span data-text="share"></span>
+        </button>
+        <button type="button" class="btn" id="play-again" data-text="playAgain"></button>
+        <a class="btn" href="index.html" data-text="home"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SHARE SHEET (opens with Share) ================= -->
+  <dialog class="modal share-sheet" id="share-sheet" aria-labelledby="share-title">
+    <div class="modal__inner">
+      <div class="modal__header">
+        <h2 class="modal__title" id="share-title" data-text="shareTitle"></h2>
+        <button type="button" class="icon-button" id="share-close" data-aria-text="closeLabel">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <img class="share-sheet__image" id="share-image" width="1080" height="1080" alt="">
+      <div class="share-sheet__actions">
+        <button type="button" class="btn btn--primary" id="share-native" data-text="shareNow" hidden></button>
+        <button type="button" class="btn" id="share-download" data-text="downloadImage"></button>
+        <button type="button" class="btn" id="share-copy" data-text="copyLink"></button>
+      </div>
+    </div>
+    <!-- Short messages such as "Copied!" (inside the sheet, so it shows above it) -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </dialog>
+
+  <!-- ================= PAUSE DIALOG (opens with ✕) ================= -->
+  <dialog class="modal pause" id="pause-dialog" aria-labelledby="pause-title">
+    <div class="modal__inner">
+      <h2 class="pause__title" id="pause-title" data-text="pausedTitle"></h2>
+      <p class="pause__message" data-text="pausedMessage"></p>
+      <div class="pause__actions">
+        <button type="button" class="btn btn--primary" id="resume-button" data-text="keepPlaying"></button>
+        <button type="button" class="btn" id="quit-confirm" data-text="quitRun"></button>
+      </div>
+    </div>
+  </dialog>
+
+
+  <script src="js/config.js"></script>
+  <script src="js/text.js"></script>
+  <script src="js/conditions.js"></script>
+  <script src="js/button-styles.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/share.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

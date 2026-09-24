@@ -1,0 +1,171 @@
+/* =====================================================================
+   BUTTONS.CSS: the look of each button style
+   =====================================================================
+
+   Every style shares the same HTML:
+
+     <button class="game-button btn-style--classic">
+       <span class="game-button__base"></span>   the housing / ring
+       <span class="game-button__cap"></span>    the part that moves when pressed
+     </button>
+
+   HOW TO ADD A STYLE
+   1. Copy one whole style block below (e.g. everything under "CLASSIC").
+   2. Replace its name (e.g. btn-style--classic) with your new name
+      everywhere in the copied block (e.g. btn-style--neon).
+   3. Change the colors.
+   4. Add the matching entry in js/button-styles.js.
+
+   Sizes are relative to --size, so a style looks right at every size.
+   ===================================================================== */
+
+
+/* ---------- Shared structure (don't change unless you know why) ---------- */
+
+.game-button {
+  --size: 220px;                        /* set by the page where the button is placed */
+  --depth: calc(var(--size) * 0.05);    /* how far the cap moves when pressed */
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.game-button__base,
+.game-button__cap {
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.game-button__base {
+  inset: 0;
+}
+
+.game-button__cap {
+  transition: transform 70ms var(--ease-out), box-shadow 70ms var(--ease-out);
+}
+
+/* The white shine on the cap */
+.game-button__cap::before {
+  content: "";
+  position: absolute;
+  top: 13%;
+  left: 21%;
+  width: 32%;
+  height: 19%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: rotate(-24deg);
+}
+
+
+/* ---------- CLASSIC: the arcade red mushroom button ---------- */
+
+.btn-style--classic .game-button__base {
+  background: radial-gradient(circle at 50% 35%, #4A4750 0%, #242228 70%);
+  border: var(--outline-width) solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.btn-style--classic .game-button__cap {
+  inset: 13%;
+  background: radial-gradient(circle at 38% 30%, var(--red-light) 0%, var(--red) 45%, var(--red-dark) 100%);
+  border: var(--outline-width) solid var(--line);
+  transform: translateY(calc(var(--depth) * -0.5));
+  box-shadow:
+    0 var(--depth) 0 0 var(--red-dark),
+    0 var(--depth) 0 var(--outline-width) var(--line);
+}
+
+.btn-style--classic.is-pressed .game-button__cap {
+  transform: translateY(calc(var(--depth) * 0.4));
+  box-shadow:
+    0 calc(var(--depth) * 0.1) 0 0 var(--red-dark),
+    0 calc(var(--depth) * 0.1) 0 var(--outline-width) var(--line);
+}
+
+
+/* ---------- PANIC: hazard stripes around a red dome ---------- */
+
+.btn-style--panic .game-button__base {
+  background: repeating-linear-gradient(
+    -45deg,
+    #FFD23F 0 calc(var(--size) * 0.05),
+    #1B1B1F calc(var(--size) * 0.05) calc(var(--size) * 0.1)
+  );
+  border: var(--outline-width) solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+/* The black rim between the stripes and the dome */
+.btn-style--panic .game-button__base::after {
+  content: "";
+  position: absolute;
+  inset: 11%;
+  border-radius: 50%;
+  background: #1B1B1F;
+  border: var(--outline-width) solid var(--line);
+}
+
+.btn-style--panic .game-button__cap {
+  inset: 18%;
+  background: radial-gradient(circle at 40% 28%, #FF8A7A 0%, var(--red) 40%, #8E1512 100%);
+  border: var(--outline-width) solid var(--line);
+  transform: translateY(calc(var(--depth) * -0.4));
+  box-shadow:
+    0 calc(var(--depth) * 0.8) 0 0 #7A110E,
+    0 calc(var(--depth) * 0.8) 0 var(--outline-width) var(--line);
+}
+
+.btn-style--panic.is-pressed .game-button__cap {
+  transform: translateY(calc(var(--depth) * 0.3));
+  box-shadow:
+    0 calc(var(--depth) * 0.1) 0 0 #7A110E,
+    0 calc(var(--depth) * 0.1) 0 var(--outline-width) var(--line);
+}
+
+
+/* ---------- COMIC POP: flat, halftone dots, thick outline ---------- */
+
+/* The base is the hard shadow behind the button */
+.btn-style--comic .game-button__base {
+  background: var(--line);
+  transform: translate(calc(var(--size) * 0.04), calc(var(--size) * 0.04));
+}
+
+.btn-style--comic .game-button__cap {
+  inset: 0;
+  background:
+    radial-gradient(circle, rgba(120, 10, 8, 0.35) 30%, transparent 33%) 0 0 / calc(var(--size) * 0.06) calc(var(--size) * 0.06),
+    var(--red);
+  border: calc(var(--outline-width) + 2px) solid var(--line);
+}
+
+/* A comic shine: a white arc at the top left */
+.btn-style--comic .game-button__cap::before {
+  top: 12%;
+  left: 12%;
+  width: 76%;
+  height: 76%;
+  background: none;
+  border: calc(var(--size) * 0.035) solid transparent;
+  border-top-color: #FFFFFF;
+  transform: rotate(-40deg);
+}
+
+.btn-style--comic.is-pressed .game-button__cap {
+  transform: translate(calc(var(--size) * 0.04), calc(var(--size) * 0.04));
+}
