@@ -1,0 +1,6 @@
+# Search engines may visit every page. The sitemap tells them which pages matter.
+# If the site address changes, change it on the Sitemap line too.
+User-agent: *
+Allow: /
+
+Sitemap: https://elbutton.netlify.app/sitemap.xml

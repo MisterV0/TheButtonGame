@@ -22,8 +22,8 @@ window.CONFIG = {
   // Decimals are fine (e.g. 6.5). Every level of a run lasts exactly this long.
   // Keep it at 4 or more: players need time to read the question AND tap up to 12 times.
   levelTimeSeconds: {
-    easy: 7,
-    hard: 6
+    easy: 6,
+    hard: 5
     // extreme: decided later
   },
 
@@ -56,6 +56,6 @@ window.CONFIG = {
   leaderboardSize: 5,
 
   // The address of the website. Used in shared links.
-  // Not final yet. If it changes, also change it in the <head> of index.html.
-  siteUrl: "https://thebuttongame.netlify.app"
+  // If it changes, also change it in the <head> of index.html, in sitemap.xml and in robots.txt.
+  siteUrl: "https://elbutton.netlify.app"
 };

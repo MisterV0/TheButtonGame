@@ -31,6 +31,7 @@ window.TEXT = {
   timesWordMany: "times",
 
   // ----- Game screen -----
+  pageHeading: "The Button Game",  // read aloud by screen readers (not shown)
   levelLabel: "Level",
   getReady: "Get ready…",
   // Shown once, under the question, on a player's very first game

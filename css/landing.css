@@ -246,7 +246,7 @@
 }
 
 .segmented__option input:checked + span {
-  background: var(--red);
+  background: var(--red-strong);
   color: var(--on-color);
   box-shadow: var(--shadow-small);
   transform: translate(-1px, -1px);
@@ -272,10 +272,6 @@
   font-size: 0.98rem;
   line-height: 1.4;
   animation: popover-in 180ms var(--ease-spring);
-}
-
-.popover p + p {
-  margin-top: 8px;
 }
 
 /* The little tail pointing at the ⓘ button (which sits right after the heading) */
@@ -308,7 +304,7 @@
   margin-top: 4px;
   border: var(--outline-width) solid var(--line);
   border-radius: 999px;
-  background: var(--red);
+  background: var(--red-strong);
   color: var(--on-color);
   box-shadow: 6px 6px 0 var(--line);
   font-family: var(--font-display);
@@ -374,7 +370,8 @@
   margin-top: 14px;
 }
 
-.howto__title {
+/* Big comic heading used by "How to play" and "See it in action" */
+.section-heading {
   font-family: var(--font-display);
   font-size: 2.1rem;
   font-weight: 400;
@@ -426,13 +423,60 @@
   line-height: 1.4;
 }
 
-.howto__note {
-  max-width: 34ch;
-  margin: 16px auto 0;
-  color: var(--text-soft);
-  font-weight: 700;
+
+/* ---------- Showcase (screenshots in phone frames) ---------- */
+
+.showcase {
+  margin-top: 14px;
+}
+
+/* Mobile: a row you can swipe sideways, reaching the screen edges */
+.showcase__list {
+  display: flex;
+  gap: 16px;
+  margin: 16px -16px 0;
+  padding: 4px 16px 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 16px;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.showcase__list::-webkit-scrollbar {
+  display: none;
+}
+
+.showcase__item {
+  flex: 0 0 62%;
+  max-width: 240px;
+  scroll-snap-align: start;
+}
+
+.showcase__item figure {
+  margin: 0;
+}
+
+/* A simple phone drawn in CSS around each screenshot */
+.phone {
+  padding: 7px;
+  border: var(--outline-width) solid var(--line);
+  border-radius: 30px;
+  background: #1B1B1F;
+  box-shadow: var(--shadow);
+}
+
+.phone img {
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+  background: var(--paper);
+}
+
+.showcase figcaption {
+  margin-top: 12px;
+  font-weight: 900;
   text-align: center;
-  text-wrap: balance;
 }
 
 
@@ -515,23 +559,37 @@
 
 /* ---------- Footer ---------- */
 
-/* The footer shares the bottom row with the language button (bottom left),
-   so it keeps 72px free on both sides and stays centered */
+/* Bottom of the page: the "Free to play" line, then the credits */
 .footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:
+    28px
+    calc(16px + env(safe-area-inset-right))
+    env(safe-area-inset-bottom)
+    calc(16px + env(safe-area-inset-left));
+  color: var(--text-soft);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* One line wherever it fits; on narrow phones it wraps into two even lines */
+.footer__note {
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* The credits share the bottom row with the two corner buttons,
+   so they keep room on both sides and line up with them */
+.footer__credits {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(76px + env(safe-area-inset-bottom));
-  padding:
-    8px
-    calc(72px + env(safe-area-inset-right))
-    calc(8px + env(safe-area-inset-bottom))
-    calc(72px + env(safe-area-inset-left));
-  color: var(--text-soft);
+  min-height: 76px;
+  padding: 8px 56px;
   font-size: 0.95rem;
   line-height: 1.4;
-  text-align: center;
-  text-wrap: balance;
 }
 
 .footer a {
@@ -579,6 +637,7 @@
   border: 0;
   border-radius: 10px;
   background: none;
+  color: var(--text);
   font-size: 1rem;
   font-weight: 800;
   text-align: left;
@@ -626,7 +685,8 @@
       "banner banner"
       "hero picker"
       "play difficulty"
-      "howto howto";
+      "howto howto"
+      "showcase showcase";
     align-items: center;
     column-gap: 56px;
     row-gap: 24px;
@@ -671,6 +731,24 @@
   .howto__steps {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+  }
+
+  .showcase {
+    grid-area: showcase;
+    margin-top: 40px;
+  }
+
+  /* Desktop: the 3 phones side by side, no scrolling */
+  .showcase__list {
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0 0;
+    padding: 4px 0 8px;
+    overflow: visible;
+  }
+
+  .showcase__item {
+    flex: 0 1 240px;
   }
 }
 

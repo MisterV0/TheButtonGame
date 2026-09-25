@@ -29,6 +29,8 @@
 ├── game.html               Game page
 ├── old.html                Original prototype (reference only, not deployed)
 ├── manifest.webmanifest    PWA manifest (installable later)
+├── sitemap.xml             Tells Google which page to list (the landing page only)
+├── robots.txt              Points search engines to the sitemap
 ├── css/
 │   ├── base.css            Design tokens, reset, typography, shared components
 │   ├── landing.css
@@ -46,7 +48,7 @@
 ├── assets/
 │   ├── fonts/              Self-hosted font files + their licenses
 │   ├── icons/              App icons (both concepts, all sizes)
-│   └── screenshots/        SVG showcase images
+│   └── screenshots/        Showcase screenshots (WebP)
 └── README.md               Plain-English guide for the owner
 ```
 
@@ -143,8 +145,8 @@ window.CONFIG = {
   // Decimals are fine (e.g. 6.5). Every level of a run lasts exactly this long.
   // Keep it at 4 or more: players need time to read the question AND tap up to 12 times.
   levelTimeSeconds: {
-    easy: 7,
-    hard: 6
+    easy: 6,
+    hard: 5
     // extreme: decided later
   },
 
@@ -167,7 +169,7 @@ window.CONFIG = {
 
   leaderboardSize: 5,          // how many best runs are kept (all difficulties together)
   // Not final yet. If it changes, also change it in the <head> of index.html (see §7).
-  siteUrl: "https://thebuttongame.netlify.app"
+  siteUrl: "https://elbutton.netlify.app"
 };
 ```
 
@@ -217,13 +219,13 @@ Top to bottom:
      - "How long can you resist pressing it?"
      - "Read carefully. Press precisely."
      - "One button. Zero mercy."
-3. **Button style carousel**
+3. **Button style carousel**, headed **"Set up the game"**
    - Shows a live preview of the actual button with ‹ › arrows. Swipe also works on touch.
    - Shows the style name and dots indicating position.
    - The selection is saved to localStorage and restored on the next visit.
 4. **Difficulty selector:** two segmented options, **Easy** and **Hard**.
    - Next to it is an **ⓘ** button.
-   - Tap or click it to open a small popover explaining the difference: timer, question mix, live counter, and end-screen details. It closes on outside tap or Esc.
+   - Tap or click it to open a small popover explaining **only the selected difficulty**: timer, question mix, live counter, and end-screen details. If the player switches difficulty while it's open, it updates. It closes on outside tap or Esc.
    - Describe the timer as "more time" / "less time". **Don't write the exact seconds** in the popover, or it goes stale when the owner edits `config.js`.
    - **Do not rely on hover.** It must work on touch.
    - Selection is saved to localStorage.
@@ -232,9 +234,9 @@ Top to bottom:
    1. **Read.** Every level gives you an instruction or a riddle.
    2. **Press.** Press the button exactly that many times. Sometimes that's zero.
    3. **Wait.** The level ends when the ring runs out. One press too many: KRAK!
-   - Below the steps, one line saying it's free, runs in the browser on phone or computer, and needs no download or sign-up.
+   - One line saying it's free, runs in the browser on phone or computer, and needs no download or sign-up. It sits at the bottom of the page, just above the footer credits.
    - Stacked on mobile, 3 in a row on desktop.
-7. **Showcase:** 3 SVG screenshots (see §9), horizontally scrollable on mobile and in a row on desktop.
+7. **Showcase:** 3 screenshots in phone frames (see §9), horizontally scrollable on mobile and in a row on desktop.
 8. **Footer:** "Made by **Levario** Independent Studio · 2026".
    - "Levario" links to `https://levario.netlify.app` and opens in a new tab with `rel="noopener"`.
    - It always sits at the bottom of the screen, even when the page is shorter than the screen.
@@ -349,8 +351,10 @@ The end screen has **two clearly separated cards**.
 ## 7. Share Feature
 
 1. The Share button opens a **preview sheet** showing a generated result image, drawn on a `<canvas>` at 1080×1080.
-   - The image is in comic style, with the big text **"I BEAT THE BUTTON 12 TIMES"** (from `text.js`).
-   - It also shows the difficulty, total time, the button in the player's chosen style, and the site URL.
+   - The image is in comic style, with the big text **"I BEAT THE BUTTON 12 TIMES"** (from `text.js`). No other title above it.
+   - The number is centered on its real letter outline inside the burst (Bangers leans right, so centering by the letter boxes looks off).
+   - It also shows the difficulty, total time, and the button in the player's chosen style, as one centered row.
+   - **No site address on the image.** The link travels with it in the share message; "Copy link" covers apps that keep only the picture.
 2. **Share:** use `navigator.share` with the image file (`navigator.canShare({ files })`) plus the text and link.
 3. **Fallback** when sharing isn't supported (most desktops):
    - "Download image" (PNG).
@@ -358,7 +362,7 @@ The end screen has **two clearly separated cards**.
 4. The shared link is `CONFIG.siteUrl + "?l=<levels>&d=<difficulty>"`. It triggers the banner in §4.
 5. Add static Open Graph and Twitter meta tags to `index.html`, using a generic 1200×630 promo image in `assets/`.
    - The image must be **PNG**, because chat apps don't show SVG previews. Create it with a local tool (see §0).
-   - The tags need full addresses (`https://thebuttongame.netlify.app/assets/...`). They are plain HTML and can't read `config.js`, so the site address lives in **two places**: `config.js` and these tags. The README tells the owner to change both.
+   - The tags need full addresses (`https://elbutton.netlify.app/assets/...`). They are plain HTML and can't read `config.js`, so the site address lives in **four places**: `config.js`, these tags, `sitemap.xml` and `robots.txt`. The README tells the owner to change all of them.
 
 > **Known limitation to state in the README:** link previews in chat apps are the same for everyone because the site is static. Personalized link previews need a Netlify Function later.
 
@@ -383,14 +387,16 @@ The end screen has **two clearly separated cards**.
 
 ---
 
-## 9. Showcase Screenshots (SVG)
+## 9. Showcase Screenshots
 
-Create 3 stylized SVGs of the game inside a simple phone frame, saved in `assets/screenshots/`:
+Take 3 **real screenshots** of the game at phone size, saved as WebP in `assets/screenshots/`, and show them inside a simple phone frame drawn in CSS:
 1. The landing page with the button carousel.
 2. Mid-game: level 07, the instruction "How many Koreas exist?", and the timer ring two-thirds full.
 3. The end screen with the two cards.
 
-They must match the real UI's colors and fonts closely. They must be lightweight (under 40KB each) and hand-built as SVG, not embedded bitmaps.
+- Capture them with headless Chrome (a local tool, see §0), in the light theme, at 2× resolution.
+- Keep each file under about 70KB. Load them only when scrolled into view (`loading="lazy"`), with `width`, `height` and a descriptive `alt`.
+- Why real screenshots instead of hand-drawn SVGs: an SVG shown as an image can't use the site's fonts, and drawings go out of date whenever the design changes. Real screenshots always match, and can be retaken in seconds.
 
 ---
 
@@ -421,7 +427,8 @@ Write it in plain English with no jargon. Include:
 - How to change the tagline and other landing page text (in `index.html`, look for `EDIT:` comments).
 - How to change game text (in `text.js`).
 - How to edit the "Coming soon" language list.
-- How to change the site address (it lives in two places: `config.js` and the `<head>` of `index.html`).
+- How to change the site address (it lives in four places: `config.js`, the `<head>` of `index.html`, `sitemap.xml` and `robots.txt`).
+- How to submit the sitemap to Google Search Console.
 - How to deploy to Netlify (drag and drop the folder). Move `old.html` out of the folder first.
 
 ---
@@ -443,7 +450,7 @@ Build in three phases. **At each checkpoint, stop and wait for the owner** befor
 - **Checkpoint:** the owner tests sharing on a real phone. This needs the site deployed on Netlify, because phone sharing and link previews don't work from a local file.
 
 **Phase 3: Assets & docs**
-- Both icon concepts in all sizes, `manifest.webmanifest`, the 3 SVG showcase screenshots on the landing page, and the README.
+- Both icon concepts in all sizes, `manifest.webmanifest`, the 3 showcase screenshots on the landing page, and the README.
 - Then go through the Definition of Done.
 
 ---

@@ -160,7 +160,7 @@ function showToast(message) {
   toast.classList.add("is-showing");
 }
 
-// Builds the link friends open, e.g. https://thebuttongame.netlify.app/?l=12&d=hard
+// Builds the link friends open, e.g. https://elbutton.netlify.app/?l=12&d=hard
 function buildShareLink(run) {
   var siteUrl = window.CONFIG.siteUrl.replace(/\/+$/, ""); // without a slash at the end
   return siteUrl + "/?l=" + run.levels + "&d=" + run.difficulty;
@@ -186,9 +186,7 @@ function drawShareImage(run, styleId) {
 
     drawPaper(ctx);
     drawHeadline(ctx, run);
-    drawTimerRing(ctx, 205, 912, 128);
-    drawButton(ctx, styleId, 205, 912, 96);
-    drawRunDetails(ctx, run);
+    drawBottomRow(ctx, run, styleId);
 
     return new Promise(function (resolve) {
       canvas.toBlob(resolve, "image/png");
@@ -223,40 +221,56 @@ function drawPaper(ctx) {
   }
 }
 
-// The top half: game name, "I BEAT THE BUTTON", the big number in a burst, "TIMES"
+// The top part: "I BEAT THE BUTTON", the big number in a burst, "TIMES"
 function drawHeadline(ctx, run) {
   var middle = SHARE_IMAGE_SIZE / 2;
 
-  drawComicText(ctx, "THE BUTTON GAME", middle, 100, {
-    size: 58, fill: SHARE_COLORS.ink, shadow: SHARE_COLORS.red, shadowOffset: 4
-  });
-
-  drawComicText(ctx, window.TEXT.shareImageTop, middle, 222, {
+  drawComicText(ctx, window.TEXT.shareImageTop, middle, 150, {
     size: 116, fill: SHARE_COLORS.ink, shadow: SHARE_COLORS.red, shadowOffset: 6, maxWidth: 980
   });
 
-  drawBurst(ctx, middle, 468, 208, 160, 16);
+  drawBurst(ctx, middle, 425, 208, 160, 16);
 
   // The more digits, the smaller the number, so it stays inside the burst
   var digits = String(run.levels).length;
-  var numberSize = digits <= 2 ? 272 : (digits === 3 ? 205 : 160);
-  drawComicText(ctx, String(run.levels), middle, 480, {
+  var numberSize = digits <= 2 ? 250 : (digits === 3 ? 190 : 150);
+  drawComicText(ctx, String(run.levels), middle, 425, {
     size: numberSize, fill: SHARE_COLORS.red, outline: 12, shadow: SHARE_COLORS.ink, shadowOffset: 9
   });
 
   var timesWord = run.levels === 1 ? window.TEXT.shareImageTimesOne : window.TEXT.shareImageTimesMany;
-  drawComicText(ctx, timesWord, middle, 722, {
+  drawComicText(ctx, timesWord, middle, 700, {
     size: 116, fill: SHARE_COLORS.ink, shadow: SHARE_COLORS.red, shadowOffset: 6
   });
 }
 
-// The bottom right: difficulty, total time, and the site address
-function drawRunDetails(ctx, run) {
-  var left = 395;
+// The bottom row, centered: the player's button, then the difficulty and total time next to it
+function drawBottomRow(ctx, run, styleId) {
+  var rowY = 898;
+  var ringRadius = 116;
+  var ringOuterRadius = ringRadius + 12; // the ring's outline sticks out a little
+  var gap = 44;
+
   var difficultyName = window.TEXT.difficultyNames[run.difficulty].toUpperCase();
+  var timeText = window.TEXT.totalTimeLabel + ": " + formatRunTime(run.timeMs);
   var isHard = run.difficulty === "hard";
 
-  drawPill(ctx, difficultyName, left, 874, {
+  // Measure the details, so the whole row can be centered
+  ctx.font = "60px " + DISPLAY_FONT;
+  var pillWidth = ctx.measureText(difficultyName).width + 60 * 0.9 + 6;
+  ctx.font = "900 44px " + BODY_FONT;
+  var timeWidth = ctx.measureText(timeText).width;
+  var detailsWidth = Math.max(pillWidth, timeWidth);
+
+  var rowWidth = ringOuterRadius * 2 + gap + detailsWidth;
+  var left = (SHARE_IMAGE_SIZE - rowWidth) / 2;
+  var buttonX = left + ringOuterRadius;
+  var detailsLeft = left + ringOuterRadius * 2 + gap;
+
+  drawTimerRing(ctx, buttonX, rowY, ringRadius);
+  drawButton(ctx, styleId, buttonX, rowY, 88);
+
+  drawPill(ctx, difficultyName, detailsLeft, rowY - 42, {
     size: 60,
     font: DISPLAY_FONT,
     fill: isHard ? SHARE_COLORS.red : SHARE_COLORS.yellow,
@@ -264,14 +278,9 @@ function drawRunDetails(ctx, run) {
   });
 
   ctx.textAlign = "left";
-  ctx.textBaseline = "middle";
   ctx.fillStyle = SHARE_COLORS.ink;
   ctx.font = "900 44px " + BODY_FONT;
-  ctx.fillText(window.TEXT.totalTimeLabel + ": " + formatRunTime(run.timeMs), left, 964);
-
-  ctx.fillStyle = SHARE_COLORS.soft;
-  ctx.font = "800 34px " + BODY_FONT;
-  ctx.fillText(window.CONFIG.siteUrl.replace(/^https?:\/\//, "").replace(/\/+$/, ""), left, 1028);
+  ctx.fillText(timeText, detailsLeft, verticalCenterBaseline(ctx, timeText, rowY + 48));
 }
 
 
@@ -465,14 +474,22 @@ function roundRectPath(ctx, x, y, width, height, radius) {
 function drawComicText(ctx, text, x, y, style) {
   var size = style.size;
   ctx.font = size + "px " + DISPLAY_FONT;
-  var width = ctx.measureText(text).width;
-  if (style.maxWidth && width > style.maxWidth) {
-    size = Math.floor(size * style.maxWidth / width);
+  var box = ctx.measureText(text);
+  var inkWidth = box.actualBoundingBoxLeft + box.actualBoundingBoxRight;
+  if (style.maxWidth && inkWidth > style.maxWidth) {
+    size = Math.floor(size * style.maxWidth / inkWidth);
     ctx.font = size + "px " + DISPLAY_FONT;
+    box = ctx.measureText(text);
   }
 
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
+  // Place the text by the real outline of its letters (not their boxes), so it looks centered.
+  // The shadow sits down-right, so everything moves up-left by half of it.
+  var shift = (style.shadowOffset || 0) / 2;
+  var left = x - (box.actualBoundingBoxRight - box.actualBoundingBoxLeft) / 2 - shift;
+  var baseline = y + (box.actualBoundingBoxAscent - box.actualBoundingBoxDescent) / 2 - shift;
+
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
   ctx.lineJoin = "round";
 
   if (style.shadow) {
@@ -480,18 +497,25 @@ function drawComicText(ctx, text, x, y, style) {
     if (style.outline) {
       ctx.lineWidth = style.outline;
       ctx.strokeStyle = style.shadow;
-      ctx.strokeText(text, x + offset, y + offset);
+      ctx.strokeText(text, left + offset, baseline + offset);
     }
     ctx.fillStyle = style.shadow;
-    ctx.fillText(text, x + offset, y + offset);
+    ctx.fillText(text, left + offset, baseline + offset);
   }
   if (style.outline) {
     ctx.lineWidth = style.outline;
     ctx.strokeStyle = SHARE_COLORS.ink;
-    ctx.strokeText(text, x, y);
+    ctx.strokeText(text, left, baseline);
   }
   ctx.fillStyle = style.fill;
-  ctx.fillText(text, x, y);
+  ctx.fillText(text, left, baseline);
+}
+
+// Returns the baseline that puts a text's letters exactly centered on centerY (uses the current font)
+function verticalCenterBaseline(ctx, text, centerY) {
+  ctx.textBaseline = "alphabetic";
+  var box = ctx.measureText(text);
+  return centerY + (box.actualBoundingBoxAscent - box.actualBoundingBoxDescent) / 2;
 }
 
 // Draws a rounded label (like a sticker) whose left edge is at x, centered on y
@@ -512,9 +536,8 @@ function drawPill(ctx, text, x, y, style) {
   outline(ctx, 6);
 
   ctx.textAlign = "left";
-  ctx.textBaseline = "middle";
   ctx.fillStyle = style.textColor;
-  ctx.fillText(text, x + paddingX, y + style.size * 0.04);
+  ctx.fillText(text, x + paddingX, verticalCenterBaseline(ctx, text, y));
 }
 
 // Draws a spiky comic burst (the star shape behind the big number), with a hard shadow

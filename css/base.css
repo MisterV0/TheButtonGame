@@ -60,6 +60,7 @@
   --line: #1B1B1F;                         /* comic outlines and hard shadows */
 
   --red: #E5322D;                          /* hero red: the button */
+  --red-strong: #DC2F2A;                   /* buttons with white text (readable enough) */
   --red-dark: #A11D19;
   --red-light: #FF7B6B;
   --yellow: #FFD23F;                       /* bursts and highlights */
@@ -223,7 +224,7 @@ img, svg {
 }
 
 .btn--primary {
-  background: var(--red);
+  background: var(--red-strong);
   color: var(--on-color);
 }
 
@@ -344,7 +345,7 @@ img, svg {
 }
 
 .difficulty-badge--hard {
-  background: var(--red);
+  background: var(--red-strong);
   color: #FFFFFF;
 }
 

@@ -162,7 +162,17 @@ function initDifficulty() {
     radios[i].checked = radios[i].value === saved;
     radios[i].addEventListener("change", function (event) {
       saveDifficulty(event.target.value);
+      showDifficultyInfo(event.target.value);
     });
+  }
+  showDifficultyInfo(saved);
+}
+
+// Shows only the selected difficulty's explanation in the ⓘ popup
+function showDifficultyInfo(difficulty) {
+  var paragraphs = document.querySelectorAll("#difficulty-info [data-difficulty]");
+  for (var i = 0; i < paragraphs.length; i++) {
+    paragraphs[i].hidden = paragraphs[i].getAttribute("data-difficulty") !== difficulty;
   }
 }
 
