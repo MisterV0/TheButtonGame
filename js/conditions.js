@@ -25,7 +25,7 @@
    - Only ONE correct answer anywhere in the world. Avoid things that change
      by country or school (continents, oceans, planets, rainbow colors,
      months, seasons, weekend days, holiday dates…).
-   - Answers from 0 to 12 (extreme may go up to 15).
+   - Answers from 0 to 12.
    - Short: 60 characters max, so it fits on a phone.
    - Always write the reason in note, so you can check it later.
    - If the text needs a quote mark, use ' (single) inside the "double" ones.
@@ -97,7 +97,6 @@ window.CONDITIONS = [
   { id: "e053", level: 1, answer: 4,  text: "Wheels on a typical car.",    note: "4 wheels" },
   { id: "e054", level: 1, answer: 12, text: "Eggs in a dozen.",            note: "A dozen = 12" },
   { id: "e055", level: 1, answer: 6,  text: "Eggs in a half dozen.",       note: "Half a dozen = 6" },
-  { id: "e056", level: 1, answer: 6,  text: "Faces on a standard die.",    note: "A die has 6 faces" },
   { id: "e057", level: 1, answer: 2,  text: "Ears on a cat.",              note: "2 ears" },
   { id: "e058", level: 1, answer: 1,  text: "Tails on a dog.",             note: "1 tail" },
   { id: "e059", level: 1, answer: 2,  text: "Knees on a human.",           note: "2 knees" },
@@ -105,13 +104,13 @@ window.CONDITIONS = [
   { id: "e061", level: 1, answer: 2,  text: "Letters in the word 'NO'.",   note: "N-O = 2" },
   { id: "e062", level: 1, answer: 3,  text: "Corners of a triangle.",      note: "A triangle has 3 corners" },
   { id: "e063", level: 1, answer: 2,  text: "Wheels on a motorcycle.",     note: "2 wheels" },
-  { id: "e064", level: 1, answer: 3,  text: "Holes in a bowling ball.",    note: "A bowling ball has 3 finger holes" },
   { id: "e065", level: 1, answer: 2,  text: "Players in a pair.",          note: "A pair = 2" },
   { id: "e066", level: 1, answer: 0,  text: "Press none.",                 note: "None = zero presses" },
   { id: "e067", level: 1, answer: 2,  text: "One plus one.",               note: "1 + 1 = 2" },
   { id: "e068", level: 1, answer: 5,  text: "Three plus two.",             note: "3 + 2 = 5" },
   { id: "e069", level: 1, answer: 4,  text: "Letters in the word 'GAME'.", note: "G-A-M-E = 4" },
   { id: "e070", level: 1, answer: 1,  text: "Thumbs on one hand.",         note: "1 thumb" },
+  
 
   // =================================================================
   // LEVEL 2: HARD. Simple math, general knowledge, mild tricks.
@@ -140,7 +139,7 @@ window.CONDITIONS = [
   // --- General knowledge ---
   { id: "h019", level: 2, answer: 2,  text: "How many Koreas exist?",               note: "North Korea and South Korea" },
   { id: "h020", level: 2, answer: 6,  text: "Players per side in indoor volleyball.", note: "Indoor volleyball: 6 per team on court" },
-  { id: "h021", level: 2, answer: 11, text: "Players per team on a soccer field.",  note: "Soccer: 11 per team on the field" },
+  { id: "h021", level: 2, answer: 11, text: "Players per team on a football field.",  note: "Soccer: 11 per team on the field" },
   { id: "h022", level: 2, answer: 4,  text: "Players in a tennis doubles match.",   note: "Doubles = 2 vs 2 = 4 players" },
   { id: "h023", level: 2, answer: 6,  text: "Legs on an insect.",                   note: "All insects have 6 legs" },
   { id: "h024", level: 2, answer: 8,  text: "Arms on an octopus.",                  note: "Octo = 8 arms" },
@@ -152,11 +151,8 @@ window.CONDITIONS = [
   { id: "h030", level: 2, answer: 6,  text: "Sides of a hexagon.",                  note: "Hexa = 6" },
   { id: "h031", level: 2, answer: 8,  text: "Sides of an octagon.",                 note: "Octa = 8" },
   { id: "h032", level: 2, answer: 6,  text: "Faces on a cube.",                     note: "A cube has 6 faces" },
-  { id: "h033", level: 2, answer: 8,  text: "Corners on a cube.",                   note: "A cube has 8 corners" },
-  { id: "h034", level: 2, answer: 5,  text: "Rings on the Olympic flag.",           note: "The Olympic flag has 5 rings" },
   { id: "h035", level: 2, answer: 2,  text: "Kings on a chessboard at the start.",  note: "1 white king + 1 black king" },
   { id: "h036", level: 2, answer: 12, text: "Numbers on a classic clock face.",     note: "1 to 12" },
-  { id: "h037", level: 2, answer: 4,  text: "Chambers in the human heart.",         note: "2 atria + 2 ventricles" },
   { id: "h038", level: 2, answer: 9,  text: "Wheels on three tricycles.",           note: "3 × 3 = 9" },
 
   // --- Mild tricks: letters, words and numbers ---
@@ -169,29 +165,23 @@ window.CONDITIONS = [
   { id: "h045", level: 2, answer: 3,  text: "Zeros in one thousand.",               note: "1000 = 3 zeros" },
   { id: "h046", level: 2, answer: 6,  text: "Zeros in one million.",                note: "1000000 = 6 zeros" },
   { id: "h047", level: 2, answer: 4,  text: "Digits in the number 2026.",           note: "2-0-2-6 = 4 digits" },
-  { id: "h048", level: 2, answer: 7,  text: "Press once per word in this sentence.", note: "Press / once / per / word / in / this / sentence = 7" },
   { id: "h049", level: 2, answer: 4,  text: "Wheels on two bicycles.",              note: "2 × 2 = 4" },
   { id: "h050", level: 2, answer: 6,  text: "Legs on three ducks.",                 note: "3 × 2 = 6" },
   { id: "h051", level: 2, answer: 5,  text: "Players on a basketball court per team.", note: "5 per team on court" },
   { id: "h052", level: 2, answer: 9,  text: "Squares on a tic-tac-toe board.",      note: "3 × 3 = 9" },
-  { id: "h053", level: 2, answer: 8,  text: "Bits in one byte.",                    note: "1 byte = 8 bits" },
   { id: "h054", level: 2, answer: 6,  text: "Letters in the word 'ELEVEN'.",        note: "Trick: E-L-E-V-E-N = 6 (not 11)" },
   { id: "h055", level: 2, answer: 6,  text: "Letters in the word 'TWELVE'.",        note: "Trick: T-W-E-L-V-E = 6 (not 12)" },
   { id: "h056", level: 2, answer: 5,  text: "Minutes in an hour divided by 12.",    note: "60 ÷ 12 = 5" },
   { id: "h057", level: 2, answer: 12, text: "Hours shown on a half-day clock.",     note: "A 12-hour clock shows 12 hours" },
-  { id: "h058", level: 2, answer: 12, text: "Legs on two insects.",                 note: "6 × 2 = 12" },
-  { id: "h059", level: 2, answer: 4,  text: "Strings on a ukulele.",                note: "A ukulele has 4 strings" },
   { id: "h060", level: 2, answer: 12, text: "Keys in one piano octave.",            note: "7 white + 5 black = 12" },
   { id: "h061", level: 2, answer: 8,  text: "Pawns per side at the start of chess.", note: "8 pawns per side" },
   { id: "h062", level: 2, answer: 2,  text: "Bishops per side in chess.",           note: "2 bishops per side" },
   { id: "h063", level: 2, answer: 2,  text: "How many O's in 'BOOKKEEPER'?",        note: "B-OO-KKEEPER = 2" },
-  { id: "h064", level: 2, answer: 4,  text: "Prime numbers from 1 to 10.",          note: "2, 3, 5, 7 (1 is not prime)" },
   { id: "h065", level: 2, answer: 3,  text: "Press (9 − 3) ÷ 2 times.",             note: "6 ÷ 2 = 3" },
   { id: "h066", level: 2, answer: 5,  text: "Press 3 squared minus 4 times.",       note: "9 − 4 = 5" },
-  { id: "h067", level: 2, answer: 5,  text: "Faces on a square pyramid.",           note: "4 triangles + 1 square = 5" },
-  { id: "h068", level: 2, answer: 6,  text: "Edges on a tetrahedron.",              note: "A tetrahedron has 6 edges" },
   { id: "h069", level: 2, answer: 3,  text: "How many D's in 'ADDED'?",             note: "A-DD-E-D = 3" },
   { id: "h070", level: 2, answer: 4,  text: "Quarters in a whole.",                 note: "4 quarters make 1 whole" },
+  { id: "h071", level: 2, answer: 3,  text: "Holes in a bowling ball.",             note: "A bowling ball has 3 finger holes" },
 
   // =================================================================
   // LEVEL 3: EXTREME. Used as a small share of Hard mode (and a future Extreme mode).
@@ -201,31 +191,25 @@ window.CONDITIONS = [
   { id: "x005", level: 3, answer: 7,  text: "Press the number of letters in 'FIFTEEN'.",    note: "Trick: F-I-F-T-E-E-N = 7 (not 15)" },
   { id: "x006", level: 3, answer: 10, text: "Press once per letter from A to J.",           note: "A B C D E F G H I J = 10" },
   { id: "x007", level: 3, answer: 3,  text: "Minutes in a quarter hour, divided by 5.",     note: "15 ÷ 5 = 3" },
-  { id: "x008", level: 3, answer: 5, text: "Press (1 + 2 + 3 + 4 + 5) − 10 times.",         note: "15 − 10 = 5" },
+  { id: "x008", level: 3, answer: 5,  text: "Press (1 + 2 + 3 + 4 + 5) − 10 times.",        note: "15 − 10 = 5" },
   { id: "x010", level: 3, answer: 12, text: "Press 144 ÷ 12 times",                         note: "144 ÷ 12 = 12" },
-  { id: "x011", level: 3, answer: 6,  text: "Legs on a tripod times wheels on a bike.",     note: "3 × 2 = 6" },
-  { id: "x012", level: 3, answer: 4,  text: "Vowels in 'EXTREME' plus consonants in 'ONE'.", note: "E, E, E = 3; N = 1; 3 + 1 = 4" },
   { id: "x013", level: 3, answer: 0,  text: "Press (9 × 9) − 81 times.",                    note: "81 − 81 = 0: don't press!" },
   { id: "x014", level: 3, answer: 4,  text: "How many E's in 'EXCELLENCE'?",                note: "E-XC-E-LL-E-NC-E = 4" },
-  { id: "x015", level: 3, answer: 5,  text: "Hours in a day ÷ 2, minus days in a week.",    note: "24 ÷ 2 = 12, − 7 = 5" },
-  { id: "x016", level: 3, answer: 15, text: "Press (5 × 5) − 10 times.",                    note: "25 − 10 = 15" },
-  { id: "x017", level: 3, answer: 13, text: "Letters in 'THIRTEEN' plus 5.",                note: "8 + 5 = 13" },
-  { id: "x018", level: 3, answer: 13, text: "Sides of an octagon plus a pentagon.",         note: "8 + 5 = 13" },
-  { id: "x019", level: 3, answer: 15, text: "Hours in a day minus sides of a nonagon.",     note: "24 − 9 = 15" },
-  { id: "x020", level: 3, answer: 15, text: "Press half of 30 times.",                      note: "30 ÷ 2 = 15" },
-  { id: "x021", level: 3, answer: 15, text: "Press 2 to the power of 4, minus 1 times.",    note: "16 − 1 = 15" },
+  { id: "x020", level: 3, answer: 9,  text: "Press half of 18 times.",                      note: "18 ÷ 2 = 9" },
+  { id: "x021", level: 3, answer: 7,  text: "Press 2 to the power of 3, minus 1 times.",    note: "8 − 1 = 7" },
   { id: "x022", level: 3, answer: 5,  text: "Vowels in the word 'EDUCATION'.",              note: "E, U, A, I, O = 5" },
-  { id: "x023", level: 3, answer: 14, text: "Cube root of 8, times 7.",                     note: "2 × 7 = 14" },
+  { id: "x023", level: 3, answer: 2,  text: "Cube root of 8",                               note: "2" },
   { id: "x024", level: 3, answer: 13, text: "Next Fibonacci number after 1,1,2,3,5,8.",     note: "8 + 5 = 13" },
   { id: "x025", level: 3, answer: 5,  text: "Roman numeral X minus V.",                     note: "10 − 5 = 5" },
-  { id: "x026", level: 3, answer: 13, text: "Press (11 × 2) − 9 times.",                    note: "22 − 9 = 13" },
-  { id: "x027", level: 3, answer: 15, text: "Press once per letter from A to O.",           note: "A through O = 15" },
   { id: "x028", level: 3, answer: 0,  text: "Press (6 × 6) − 36 times.",                    note: "36 − 36 = 0: don't press!" },
-  { id: "x029", level: 3, answer: 14, text: "Corners on a cube plus faces on a cube.",      note: "8 + 6 = 14" },
-  { id: "x030", level: 3, answer: 12, text: "Olympic rings plus days of the week.",         note: "5 + 7 = 12" },
+  { id: "x030", level: 3, answer: 6,  text: "Olympic rings",                                note: "5" },
   { id: "x031", level: 3, answer: 15, text: "Seconds in a quarter minute.",                 note: "60 ÷ 4 = 15" },
-  { id: "x032", level: 3, answer: 15, text: "3 cubed minus 12.",                            note: "27 − 12 = 15" },
   { id: "x033", level: 3, answer: 4,  text: "How many I's in 'MISSISSIPPI'?",               note: "M-I-SS-I-SS-I-PP-I = 4" },
-  { id: "x034", level: 3, answer: 11, text: "Sides of a hexagon plus sides of a pentagon.", note: "6 + 5 = 11" },
-  { id: "x035", level: 3, answer: 9,  text: "Letters in 'BUTTON' plus letters in 'CAT'.",   note: "6 + 3 = 9" }
+  { id: "x064", level: 3, answer: 4,  text: "Prime numbers from 1 to 10.",                  note: "2, 3, 5, 7" },
+  { id: "x065", level: 3, answer: 5,  text: "Faces on a square pyramid.",                   note: "4 triangles + 1 square = 5" },
+  { id: "x066", level: 3, answer: 8,  text: "Bits in one byte.",                            note: "1 byte = 8 bits" },
+  { id: "x067", level: 3, answer: 4,  text: "Chambers in the human heart.",                 note: "2 atria + 2 ventricles" },
+  { id: "x068", level: 3, answer: 7,  text: "Press once per word in this sentence.",        note: "once per word in this sentence = 7" },
+  { id: "x069", level: 3, answer: 8,  text: "Corners on a cube.",                           note: "A cube has 8 corners" },
+  { id: "x079", level: 3, answer: 0,  text: "Press (1 x 7 x 8 x 0 x 2) times.",             note: "Anything × 0 = 0: don't press!" },
 ];
