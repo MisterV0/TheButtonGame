@@ -10,7 +10,7 @@
    THE THINGS YOU WILL CHANGE MOST OFTEN ARE THE LEVEL TIMERS, right below.
 
    Example: to give Easy players 8 seconds per level, change
-       easy: 7,
+       easy: 5,
    to
        easy: 8,
    ===================================================================== */
@@ -22,7 +22,7 @@ window.CONFIG = {
   // Decimals are fine (e.g. 6.5). Every level of a run lasts exactly this long.
   // Keep it at 4 or more: players need time to read the question AND tap up to 12 times.
   levelTimeSeconds: {
-    easy: 6,
+    easy: 5,
     hard: 5
     // extreme: decided later
   },
@@ -40,7 +40,7 @@ window.CONFIG = {
     },
 
     hard: {
-      conditionWeights: { 1: 0.3, 2: 0.7 },
+      conditionWeights: { 1: 0.15, 2: 0.7, 3: 0.15 },
       instantFail: true,
       showLiveCounter: false,
       // OWNER DECISION PENDING: consider revealing the correct answer on Hard too.

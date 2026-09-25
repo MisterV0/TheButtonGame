@@ -5,7 +5,7 @@
    Each question is one block between { and }, followed by a comma.
 
    {
-     id: "e051",                  // unique name. e = easy (1), h = hard (2), x = extreme (3)
+     id: "e099",                  // unique name. e = easy (1), h = hard (2), x = extreme (3)
      level: 1,                    // 1 = easy, 2 = hard, 3 = extreme
      answer: 3,                   // how many presses are correct (0 = don't press)
      text: "Wheels on a tricycle.",  // what the player reads (60 characters max)
@@ -92,6 +92,26 @@ window.CONDITIONS = [
   { id: "e048", level: 1, answer: 3,  text: "Colors on a traffic light.",  note: "Red, amber/yellow, green = 3" },
   { id: "e049", level: 1, answer: 2,  text: "Players in a game of chess.", note: "Chess is played by 2 players" },
   { id: "e050", level: 1, answer: 2,  text: "Players in a tennis singles match.", note: "Singles = 1 vs 1 = 2 players" },
+  { id: "e051", level: 1, answer: 5,  text: "Fingers on one hand.",        note: "5 fingers" },
+  { id: "e052", level: 1, answer: 10, text: "Fingers on two hands.",       note: "5 + 5 = 10" },
+  { id: "e053", level: 1, answer: 4,  text: "Wheels on a typical car.",    note: "4 wheels" },
+  { id: "e054", level: 1, answer: 12, text: "Eggs in a dozen.",            note: "A dozen = 12" },
+  { id: "e055", level: 1, answer: 6,  text: "Eggs in a half dozen.",       note: "Half a dozen = 6" },
+  { id: "e056", level: 1, answer: 6,  text: "Faces on a standard die.",    note: "A die has 6 faces" },
+  { id: "e057", level: 1, answer: 2,  text: "Ears on a cat.",              note: "2 ears" },
+  { id: "e058", level: 1, answer: 1,  text: "Tails on a dog.",             note: "1 tail" },
+  { id: "e059", level: 1, answer: 2,  text: "Knees on a human.",           note: "2 knees" },
+  { id: "e060", level: 1, answer: 3,  text: "Letters in the word 'YES'.",  note: "Y-E-S = 3" },
+  { id: "e061", level: 1, answer: 2,  text: "Letters in the word 'NO'.",   note: "N-O = 2" },
+  { id: "e062", level: 1, answer: 3,  text: "Corners of a triangle.",      note: "A triangle has 3 corners" },
+  { id: "e063", level: 1, answer: 2,  text: "Wheels on a motorcycle.",     note: "2 wheels" },
+  { id: "e064", level: 1, answer: 3,  text: "Holes in a bowling ball.",    note: "A bowling ball has 3 finger holes" },
+  { id: "e065", level: 1, answer: 2,  text: "Players in a pair.",          note: "A pair = 2" },
+  { id: "e066", level: 1, answer: 0,  text: "Press none.",                 note: "None = zero presses" },
+  { id: "e067", level: 1, answer: 2,  text: "One plus one.",               note: "1 + 1 = 2" },
+  { id: "e068", level: 1, answer: 5,  text: "Three plus two.",             note: "3 + 2 = 5" },
+  { id: "e069", level: 1, answer: 4,  text: "Letters in the word 'GAME'.", note: "G-A-M-E = 4" },
+  { id: "e070", level: 1, answer: 1,  text: "Thumbs on one hand.",         note: "1 thumb" },
 
   // =================================================================
   // LEVEL 2: HARD. Simple math, general knowledge, mild tricks.
@@ -152,25 +172,60 @@ window.CONDITIONS = [
   { id: "h048", level: 2, answer: 7,  text: "Press once per word in this sentence.", note: "Press / once / per / word / in / this / sentence = 7" },
   { id: "h049", level: 2, answer: 4,  text: "Wheels on two bicycles.",              note: "2 × 2 = 4" },
   { id: "h050", level: 2, answer: 6,  text: "Legs on three ducks.",                 note: "3 × 2 = 6" },
+  { id: "h051", level: 2, answer: 5,  text: "Players on a basketball court per team.", note: "5 per team on court" },
+  { id: "h052", level: 2, answer: 9,  text: "Squares on a tic-tac-toe board.",      note: "3 × 3 = 9" },
+  { id: "h053", level: 2, answer: 8,  text: "Bits in one byte.",                    note: "1 byte = 8 bits" },
+  { id: "h054", level: 2, answer: 6,  text: "Letters in the word 'ELEVEN'.",        note: "Trick: E-L-E-V-E-N = 6 (not 11)" },
+  { id: "h055", level: 2, answer: 6,  text: "Letters in the word 'TWELVE'.",        note: "Trick: T-W-E-L-V-E = 6 (not 12)" },
+  { id: "h056", level: 2, answer: 5,  text: "Minutes in an hour divided by 12.",    note: "60 ÷ 12 = 5" },
+  { id: "h057", level: 2, answer: 12, text: "Hours shown on a half-day clock.",     note: "A 12-hour clock shows 12 hours" },
+  { id: "h058", level: 2, answer: 12, text: "Legs on two insects.",                 note: "6 × 2 = 12" },
+  { id: "h059", level: 2, answer: 4,  text: "Strings on a ukulele.",                note: "A ukulele has 4 strings" },
+  { id: "h060", level: 2, answer: 12, text: "Keys in one piano octave.",            note: "7 white + 5 black = 12" },
+  { id: "h061", level: 2, answer: 8,  text: "Pawns per side at the start of chess.", note: "8 pawns per side" },
+  { id: "h062", level: 2, answer: 2,  text: "Bishops per side in chess.",           note: "2 bishops per side" },
+  { id: "h063", level: 2, answer: 2,  text: "How many O's in 'BOOKKEEPER'?",        note: "B-OO-KKEEPER = 2" },
+  { id: "h064", level: 2, answer: 4,  text: "Prime numbers from 1 to 10.",          note: "2, 3, 5, 7 (1 is not prime)" },
+  { id: "h065", level: 2, answer: 3,  text: "Press (9 − 3) ÷ 2 times.",             note: "6 ÷ 2 = 3" },
+  { id: "h066", level: 2, answer: 5,  text: "Press 3 squared minus 4 times.",       note: "9 − 4 = 5" },
+  { id: "h067", level: 2, answer: 5,  text: "Faces on a square pyramid.",           note: "4 triangles + 1 square = 5" },
+  { id: "h068", level: 2, answer: 6,  text: "Edges on a tetrahedron.",              note: "A tetrahedron has 6 edges" },
+  { id: "h069", level: 2, answer: 3,  text: "How many D's in 'ADDED'?",             note: "A-DD-E-D = 3" },
+  { id: "h070", level: 2, answer: 4,  text: "Quarters in a whole.",                 note: "4 quarters make 1 whole" },
 
   // =================================================================
-  // LEVEL 3: EXTREME. Not playable yet (future Extreme mode).
+  // LEVEL 3: EXTREME. Used as a small share of Hard mode (and a future Extreme mode).
   // Multi-step logic, tricky wording, bigger mental math. Answers up to 15.
   // =================================================================
 
-  { id: "x001", level: 3, answer: 12, text: "Press (7 × 8) − 44 times.",                    note: "56 − 44 = 12" },
-  { id: "x002", level: 3, answer: 13, text: "Press (13 × 3) − 26 times.",                   note: "39 − 26 = 13" },
-  { id: "x003", level: 3, answer: 2,  text: "Legs on a spider minus legs on an insect.",    note: "8 − 6 = 2" },
-  { id: "x004", level: 3, answer: 10, text: "Sides of a hexagon plus sides of a square.",   note: "6 + 4 = 10" },
   { id: "x005", level: 3, answer: 7,  text: "Press the number of letters in 'FIFTEEN'.",    note: "Trick: F-I-F-T-E-E-N = 7 (not 15)" },
   { id: "x006", level: 3, answer: 10, text: "Press once per letter from A to J.",           note: "A B C D E F G H I J = 10" },
   { id: "x007", level: 3, answer: 3,  text: "Minutes in a quarter hour, divided by 5.",     note: "15 ÷ 5 = 3" },
-  { id: "x008", level: 3, answer: 11, text: "Press (1 + 2 + 3 + 4 + 5) − 4 times.",         note: "15 − 4 = 11" },
-  { id: "x009", level: 3, answer: 14, text: "Days in a fortnight.",                         note: "A fortnight = 2 weeks = 14 days" },
-  { id: "x010", level: 3, answer: 15, text: "Press (144 ÷ 12) + 3 times.",                  note: "144 ÷ 12 = 12, + 3 = 15" },
+  { id: "x008", level: 3, answer: 5, text: "Press (1 + 2 + 3 + 4 + 5) − 10 times.",         note: "15 − 10 = 5" },
+  { id: "x010", level: 3, answer: 12, text: "Press 144 ÷ 12 times",                         note: "144 ÷ 12 = 12" },
   { id: "x011", level: 3, answer: 6,  text: "Legs on a tripod times wheels on a bike.",     note: "3 × 2 = 6" },
   { id: "x012", level: 3, answer: 4,  text: "Vowels in 'EXTREME' plus consonants in 'ONE'.", note: "E, E, E = 3; N = 1; 3 + 1 = 4" },
   { id: "x013", level: 3, answer: 0,  text: "Press (9 × 9) − 81 times.",                    note: "81 − 81 = 0: don't press!" },
   { id: "x014", level: 3, answer: 4,  text: "How many E's in 'EXCELLENCE'?",                note: "E-XC-E-LL-E-NC-E = 4" },
-  { id: "x015", level: 3, answer: 5,  text: "Hours in a day ÷ 2, minus days in a week.",    note: "24 ÷ 2 = 12, − 7 = 5" }
+  { id: "x015", level: 3, answer: 5,  text: "Hours in a day ÷ 2, minus days in a week.",    note: "24 ÷ 2 = 12, − 7 = 5" },
+  { id: "x016", level: 3, answer: 15, text: "Press (5 × 5) − 10 times.",                    note: "25 − 10 = 15" },
+  { id: "x017", level: 3, answer: 13, text: "Letters in 'THIRTEEN' plus 5.",                note: "8 + 5 = 13" },
+  { id: "x018", level: 3, answer: 13, text: "Sides of an octagon plus a pentagon.",         note: "8 + 5 = 13" },
+  { id: "x019", level: 3, answer: 15, text: "Hours in a day minus sides of a nonagon.",     note: "24 − 9 = 15" },
+  { id: "x020", level: 3, answer: 15, text: "Press half of 30 times.",                      note: "30 ÷ 2 = 15" },
+  { id: "x021", level: 3, answer: 15, text: "Press 2 to the power of 4, minus 1 times.",    note: "16 − 1 = 15" },
+  { id: "x022", level: 3, answer: 5,  text: "Vowels in the word 'EDUCATION'.",              note: "E, U, A, I, O = 5" },
+  { id: "x023", level: 3, answer: 14, text: "Cube root of 8, times 7.",                     note: "2 × 7 = 14" },
+  { id: "x024", level: 3, answer: 13, text: "Next Fibonacci number after 1,1,2,3,5,8.",     note: "8 + 5 = 13" },
+  { id: "x025", level: 3, answer: 5,  text: "Roman numeral X minus V.",                     note: "10 − 5 = 5" },
+  { id: "x026", level: 3, answer: 13, text: "Press (11 × 2) − 9 times.",                    note: "22 − 9 = 13" },
+  { id: "x027", level: 3, answer: 15, text: "Press once per letter from A to O.",           note: "A through O = 15" },
+  { id: "x028", level: 3, answer: 0,  text: "Press (6 × 6) − 36 times.",                    note: "36 − 36 = 0: don't press!" },
+  { id: "x029", level: 3, answer: 14, text: "Corners on a cube plus faces on a cube.",      note: "8 + 6 = 14" },
+  { id: "x030", level: 3, answer: 12, text: "Olympic rings plus days of the week.",         note: "5 + 7 = 12" },
+  { id: "x031", level: 3, answer: 15, text: "Seconds in a quarter minute.",                 note: "60 ÷ 4 = 15" },
+  { id: "x032", level: 3, answer: 15, text: "3 cubed minus 12.",                            note: "27 − 12 = 15" },
+  { id: "x033", level: 3, answer: 4,  text: "How many I's in 'MISSISSIPPI'?",               note: "M-I-SS-I-SS-I-PP-I = 4" },
+  { id: "x034", level: 3, answer: 11, text: "Sides of a hexagon plus sides of a pentagon.", note: "6 + 5 = 11" },
+  { id: "x035", level: 3, answer: 9,  text: "Letters in 'BUTTON' plus letters in 'CAT'.",   note: "6 + 3 = 9" }
 ];
